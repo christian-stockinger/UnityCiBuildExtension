@@ -10,9 +10,18 @@ public class AutoBuilderCore
 
     private AutoBuilderCore() { }
 
-    public static AutoBuilderCore Instance => _instance ?? (_instance = new AutoBuilderCore());
+    public static AutoBuilderCore Instance
+    {
+        get { return _instance ?? (_instance = new AutoBuilderCore()); }
+    }
 
-    public static string ProductName => PlayerSettings.productName;
+    public static string ProductName
+    {
+        get
+        {
+            return PlayerSettings.productName;
+        }
+    } 
 
     private BuildTarget _buildTarget = BuildTarget.StandaloneWindows64;
 
@@ -118,8 +127,8 @@ public class AutoBuilderCore
     {
         string value = Environment.GetEnvironmentVariable(variable, EnvironmentVariableTarget.Process);
 
-        if (string.IsNullOrWhiteSpace(value)) {
-            Debug.LogError($"The EnvironmentVariable {variable} was null or Whitespace");
+        if (string.IsNullOrEmpty(value)) {
+            Debug.LogError(string.Format("The EnvironmentVariable {0} was null or Whitespace", variable));
         }
 
         return value;
