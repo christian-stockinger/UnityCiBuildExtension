@@ -147,15 +147,15 @@ public class AutoBuilderCore
     /// <returns></returns>
     private static string GetEnvironmentVariable(string variable)
     {
-        Debug.LogError("Process: " + Environment.GetEnvironmentVariable(variable, EnvironmentVariableTarget.Process));
-        Debug.LogError("Machine: " + Environment.GetEnvironmentVariable(variable, EnvironmentVariableTarget.Machine));
-        Debug.LogError("User: " + Environment.GetEnvironmentVariable(variable, EnvironmentVariableTarget.User));
-
         string value = Environment.GetEnvironmentVariable(variable, EnvironmentVariableTarget.Process);
 
         if (string.IsNullOrEmpty(value))
         {
             Debug.LogError(string.Format("The EnvironmentVariable {0} was null or Whitespace", variable));
+        }
+        else
+        {
+            Debug.Log(string.Format("Found {0} with the value {1}", variable, value));
         }
 
         return value;
