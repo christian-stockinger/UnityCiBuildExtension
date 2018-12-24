@@ -1,3 +1,12 @@
+// ----------------------------------------------------------------------
+// File:           AutoBuilder.cs
+// Organization:   iNTENCE automotive electronics GmbH 
+// Copyright:      © 2018 iNTENCE GmbH. All rights reserved. 
+// Author:         c.stockinger (c.stockinger@intence.de)
+// LastChangedBy:  c.stockinger (c.stockinger@intence.de)
+// ----------------------------------------------------------------------
+
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -145,6 +154,10 @@ class AutoBuilder
             PlayerSettings.Android.keyaliasPass = Environment.GetEnvironmentVariable("ANDROID_KEYALIAS_PASSWORD", EnvironmentVariableTarget.Process);
             EditorPrefs.SetString("AndroidSdkRoot", Environment.GetEnvironmentVariable("ANDROID_SDK_PATH", EnvironmentVariableTarget.Process));
             EditorPrefs.SetString("AndroidNdkRoot", Environment.GetEnvironmentVariable("ANDROID_NDK_PATH", EnvironmentVariableTarget.Process));
+
+            Debug.Log("NDK Process " + Environment.GetEnvironmentVariable("ANDROID_NDK_PATH", EnvironmentVariableTarget.Process));
+            Debug.Log("NDK Machine " + Environment.GetEnvironmentVariable("ANDROID_NDK_PATH", EnvironmentVariableTarget.Machine));
+            Debug.Log("NDK User " + Environment.GetEnvironmentVariable("ANDROID_NDK_PATH", EnvironmentVariableTarget.User));
         }
 
         string path = Path.Combine(Path.Combine(BuildPathRoot, targetGroup.ToString()), ProductName + "_" + buildTarget);
