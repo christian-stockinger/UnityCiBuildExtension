@@ -1,4 +1,11 @@
-﻿using System;
+﻿// ----------------------------------------------------------------------
+// File:           AutoBuilderCore.cs
+// Organization:   iNTENCE automotive electronics GmbH 
+// Copyright:      © 2018 iNTENCE GmbH. All rights reserved. 
+// Author:         c.stockinger (c.stockinger@intence.de)
+// LastChangedBy:  c.stockinger (c.stockinger@intence.de)
+// ----------------------------------------------------------------------
+using System;
 using System.IO;
 using System.Linq;
 using UnityEditor;
@@ -8,11 +15,16 @@ public class AutoBuilderCore
 {
     private static AutoBuilderCore _instance = null;
 
-    private AutoBuilderCore() { }
+    private AutoBuilderCore()
+    {
+    }
 
     public static AutoBuilderCore Instance
     {
-        get { return _instance ?? (_instance = new AutoBuilderCore()); }
+        get
+        {
+            return _instance ?? (_instance = new AutoBuilderCore());
+        }
     }
 
     public static string ProductName
@@ -21,7 +33,7 @@ public class AutoBuilderCore
         {
             return PlayerSettings.productName;
         }
-    } 
+    }
 
     private BuildTarget _buildTarget = BuildTarget.StandaloneWindows64;
 
@@ -43,13 +55,20 @@ public class AutoBuilderCore
 
     public static int AndroidLastBuildVersionCode
     {
-        get { return PlayerPrefs.GetInt("LastVersionCode", -1); }
-        set { PlayerPrefs.SetInt("LastVersionCode", value); }
+        get
+        {
+            return PlayerPrefs.GetInt("LastVersionCode", -1);
+        }
+        set
+        {
+            PlayerPrefs.SetInt("LastVersionCode", value);
+        }
     }
 
     public BuildTargetGroup ConvertBuildTarget()
     {
-        switch (this._buildTarget) {
+        switch (this._buildTarget)
+        {
             case BuildTarget.StandaloneOSX:
             case BuildTarget.iOS: return BuildTargetGroup.iOS;
             case BuildTarget.StandaloneWindows:
@@ -76,7 +95,8 @@ public class AutoBuilderCore
     /// <returns></returns>
     public string GetExtension()
     {
-        switch (this._buildTarget) {
+        switch (this._buildTarget)
+        {
             case BuildTarget.StandaloneOSX: break;
             case BuildTarget.StandaloneWindows:
             case BuildTarget.StandaloneWindows64: return ".exe";
@@ -125,9 +145,14 @@ public class AutoBuilderCore
     /// <returns></returns>
     private static string GetEnvironmentVariable(string variable)
     {
+        Debug.Log("Process: " + Environment.GetEnvironmentVariable(variable, EnvironmentVariableTarget.Process));
+        Debug.Log("Machine: " + Environment.GetEnvironmentVariable(variable, EnvironmentVariableTarget.Machine));
+        Debug.Log("User: " + Environment.GetEnvironmentVariable(variable, EnvironmentVariableTarget.User));
+
         string value = Environment.GetEnvironmentVariable(variable, EnvironmentVariableTarget.Process);
 
-        if (string.IsNullOrEmpty(value)) {
+        if (string.IsNullOrEmpty(value))
+        {
             Debug.LogError(string.Format("The EnvironmentVariable {0} was null or Whitespace", variable));
         }
 
@@ -154,7 +179,8 @@ public class AutoBuilderCore
         SetBuildTarget(_buildTarget);
         BuildTargetGroup targetGroup = ConvertBuildTarget();
 
-        if (_buildTarget == BuildTarget.Android) {
+        if (_buildTarget == BuildTarget.Android)
+        {
             AndroidLastBuildVersionCode = PlayerSettings.Android.bundleVersionCode;
             this.SetUpAndroidEnvironment();
         }
