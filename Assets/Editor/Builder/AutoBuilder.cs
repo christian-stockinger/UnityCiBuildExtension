@@ -1,3 +1,9 @@
+// ----------------------------------------------------------------------
+// File:           AutoBuilder.cs
+// Author:         c.stockinger (c.stockinger@intence.de)
+// LastChangedBy:  c.stockinger (c.stockinger@intence.de)
+// ----------------------------------------------------------------------
+
 using UnityEditor;
 
 internal class AutoBuilder
@@ -5,6 +11,15 @@ internal class AutoBuilder
     [MenuItem("Tools/Build/Android")]
     private static void BuildAndroid()
     {
+        EditorUserBuildSettings.exportAsGoogleAndroidProject = false;
+        AutoBuilderCore.Instance.SetBuildTarget(BuildTarget.Android);
+        AutoBuilderCore.Instance.PerformBuild();
+    }
+
+    [MenuItem("Tools/Build/AndroidGradle")]
+    private static void BuildAndroidGradle()
+    {
+        EditorUserBuildSettings.exportAsGoogleAndroidProject = true;
         AutoBuilderCore.Instance.SetBuildTarget(BuildTarget.Android);
         AutoBuilderCore.Instance.PerformBuild();
     }
