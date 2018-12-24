@@ -5,6 +5,8 @@
 // Author:         c.stockinger (c.stockinger@intence.de)
 // LastChangedBy:  c.stockinger (c.stockinger@intence.de)
 // ----------------------------------------------------------------------
+
+
 using System;
 using System.IO;
 using System.Linq;
@@ -145,9 +147,9 @@ public class AutoBuilderCore
     /// <returns></returns>
     private static string GetEnvironmentVariable(string variable)
     {
-        Debug.Log("Process: " + Environment.GetEnvironmentVariable(variable, EnvironmentVariableTarget.Process));
-        Debug.Log("Machine: " + Environment.GetEnvironmentVariable(variable, EnvironmentVariableTarget.Machine));
-        Debug.Log("User: " + Environment.GetEnvironmentVariable(variable, EnvironmentVariableTarget.User));
+        Debug.LogError("Process: " + Environment.GetEnvironmentVariable(variable, EnvironmentVariableTarget.Process));
+        Debug.LogError("Machine: " + Environment.GetEnvironmentVariable(variable, EnvironmentVariableTarget.Machine));
+        Debug.LogError("User: " + Environment.GetEnvironmentVariable(variable, EnvironmentVariableTarget.User));
 
         string value = Environment.GetEnvironmentVariable(variable, EnvironmentVariableTarget.Process);
 
