@@ -166,11 +166,12 @@ public class AutoBuilderCore
     /// </summary>
     private void SetUpAndroidEnvironment()
     {
+        string environmentProductName = ProductName.ToUpper();
         Debug.Log("Start Setup Android Environment");
-        PlayerSettings.Android.keystoreName = GetEnvironmentVariable("ANDROID_KEYSTORE_NAME");
-        PlayerSettings.Android.keystorePass = GetEnvironmentVariable("ANDROID_KEYSTORE_PASSWORD");
-        PlayerSettings.Android.keyaliasName = GetEnvironmentVariable("ANDROID_KEYALIAS_NAME");
-        PlayerSettings.Android.keyaliasPass = GetEnvironmentVariable("ANDROID_KEYALIAS_PASSWORD");
+        PlayerSettings.Android.keystoreName = GetEnvironmentVariable("ANDROID_KEYSTORE_" + environmentProductName + "_NAME");
+        PlayerSettings.Android.keystorePass = GetEnvironmentVariable("ANDROID_KEYSTORE_" + environmentProductName + "_PASSWORD");
+        PlayerSettings.Android.keyaliasName = GetEnvironmentVariable("ANDROID_KEYALIAS_" + environmentProductName + "_NAME");
+        PlayerSettings.Android.keyaliasPass = GetEnvironmentVariable("ANDROID_KEYALIAS_" + environmentProductName + "_PASSWORD");
         EditorPrefs.SetString("AndroidSdkRoot", GetEnvironmentVariable("ANDROID_SDK_PATH"));
         EditorPrefs.SetString("AndroidNdkRoot", GetEnvironmentVariable("ANDROID_NDK_PATH"));
         Debug.Log("Finished Setup Android Environment");
