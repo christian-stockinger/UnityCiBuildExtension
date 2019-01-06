@@ -51,6 +51,14 @@ internal class AutoBuilder
         AutoBuilderCore.Instance.SetBuildTarget(BuildTarget.XboxOne);
         AutoBuilderCore.Instance.PerformBuild();
     }
+	
+	
+    [MenuItem("Tools/Build/WebGL")]
+    private static void BuildWebGL()
+    {
+        AutoBuilderCore.Instance.SetBuildTarget(BuildTarget.WebGL);
+        AutoBuilderCore.Instance.PerformBuild();
+    }
 
     [MenuItem("Tools/Build/Windows64")]
     private static void BuildWindows64()
