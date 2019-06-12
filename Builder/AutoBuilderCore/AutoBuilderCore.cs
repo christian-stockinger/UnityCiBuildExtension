@@ -48,7 +48,7 @@ public class AutoBuilderCore
     {
         get
         {
-            string path = Path.Combine(Environment.CurrentDirectory, ProductName);
+            string path = Path.Combine(Environment.CurrentDirectory, "Build");
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 
             return path;
@@ -188,7 +188,7 @@ public class AutoBuilderCore
             this.SetUpAndroidEnvironment();
         }
 
-        string path = Path.Combine(Path.Combine(BuildPathRoot, targetGroup.ToString()), ProductName + "_" + _buildTarget);
+        string path = Path.Combine(BuildPathRoot, _buildTarget.ToString());
         string name = ProductName + GetExtension();
 
         string defineSymbole = PlayerSettings.GetScriptingDefineSymbolsForGroup(targetGroup);
@@ -203,7 +203,5 @@ public class AutoBuilderCore
 
         Debug.Log(buildPlayerOptions.locationPathName + ": " + BuildPipeline.BuildPlayer(buildPlayerOptions));
         PlayerSettings.SetScriptingDefineSymbolsForGroup(targetGroup, defineSymbole);
-
-        EditorUtility.RevealInFinder(path);
     }
 }
