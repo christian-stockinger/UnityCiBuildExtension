@@ -147,7 +147,7 @@ public class AutoBuilderCore
     /// <returns></returns>
     private static string GetEnvironmentVariable(string variable)
     {
-        string value = Environment.GetEnvironmentVariable(variable, EnvironmentVariableTarget.Process);
+        string value = Environment.GetEnvironmentVariable(variable, EnvironmentVariableTarget.Machine);
 
         if (string.IsNullOrEmpty(value))
         {
